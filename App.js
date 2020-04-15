@@ -1,22 +1,28 @@
 import React,{ useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import ReduxThunk from 'redux-thunk';
 
 import { AppLoading } from 'expo';
 
 import Mealsnav from './nav/Mealsnav';
+import placesReducer from './store/places-reducer';
 
+const rootReducer = combineReducers({
+  places: placesReducer
+})
 
-
-
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk))
 
 export default function App() {
 
 
   
   return (
-    
+    <Provider store={store}>
     <Mealsnav></Mealsnav>
-   
+    </Provider>
   
   
  
