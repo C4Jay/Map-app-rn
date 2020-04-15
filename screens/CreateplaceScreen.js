@@ -10,6 +10,7 @@ const CreateplaceScreen = (props) => {
     
    
     const [title, settitle] = useState('')
+    const [imguri, setimguri] = useState()
 
     const dispatch = useDispatch()
 
@@ -17,8 +18,12 @@ const CreateplaceScreen = (props) => {
         settitle(title)
     }
 
+    const takenimageHandler = (imagepath) => {
+        setimguri(imagepath)
+    }
+
     const savePlaceHandler = () => {
-        dispatch(placesactions.createPlace(title))
+        dispatch(placesactions.createPlace(title, imguri))
         props.navigation.navigate('Placeslist')
     }
 
@@ -32,7 +37,7 @@ const CreateplaceScreen = (props) => {
              value={title}
              style={styles.textinput}></TextInput>
 
-             <ImgPicker></ImgPicker>
+             <ImgPicker onImageTaken={takenimageHandler}></ImgPicker>
 
 
             <Button onPress={savePlaceHandler} color="purple">
