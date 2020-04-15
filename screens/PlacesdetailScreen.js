@@ -1,11 +1,17 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
 
 const PlacesdetailScreen = (props) => {
+
+    
+    
     return (
         <View>
-            <Text>Hey</Text>
+          
             <Text>{props.navigation.getParam('placeTitle')}</Text>
+            <View>
+            <Image style={{height: 198, width: 168}} source={{uri: props.navigation.getParam('imguri')}}></Image>
+            </View>
         </View> 
         )
 }

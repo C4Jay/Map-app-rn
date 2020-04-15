@@ -9,6 +9,17 @@ import { AppLoading } from 'expo';
 import Mealsnav from './nav/Mealsnav';
 import placesReducer from './store/places-reducer';
 
+import { init } from './helpers/db';
+
+init()
+.then(() => {
+  console.log('Init proceed')
+})
+.catch(err => {
+  console.log('Failure on Init');
+  console.log(err)
+})
+
 const rootReducer = combineReducers({
   places: placesReducer
 })
