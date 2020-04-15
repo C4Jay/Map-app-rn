@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Alert } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Button } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
 import * as placesactions from '../store/places-action';
+import ImgPicker from '../components/imgselector';
 
 const CreateplaceScreen = (props) => {
-
+    
+   
     const [title, settitle] = useState('')
 
     const dispatch = useDispatch()
@@ -29,6 +31,10 @@ const CreateplaceScreen = (props) => {
              onChangeText={titleHandler} 
              value={title}
              style={styles.textinput}></TextInput>
+
+             <ImgPicker></ImgPicker>
+
+
             <Button onPress={savePlaceHandler} color="purple">
             Create
             </Button>
