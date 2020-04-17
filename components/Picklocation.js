@@ -48,7 +48,10 @@ const Pickerlocation = (props) => {
     }
 
     const pickonmapHandler = () => {
-        props.navigation.navigate('Mapview')
+        props.navigation.navigate('Mapview', {
+            lat:locationpicked.lat,
+            lng: locationpicked.lng
+        })
         }
 
     return (
