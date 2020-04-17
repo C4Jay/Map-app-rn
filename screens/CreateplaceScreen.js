@@ -5,6 +5,7 @@ import { Button } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
 import * as placesactions from '../store/places-action';
 import ImgPicker from '../components/imgselector';
+import Pickerlocation from '../components/Picklocation';
 
 const CreateplaceScreen = (props) => {
     
@@ -39,7 +40,7 @@ const CreateplaceScreen = (props) => {
 
              <ImgPicker onImageTaken={takenimageHandler}></ImgPicker>
 
-
+             <Pickerlocation navigation={props.navigation}></Pickerlocation>
             <Button onPress={savePlaceHandler} color="purple">
             Create
             </Button>

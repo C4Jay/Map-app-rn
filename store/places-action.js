@@ -32,9 +32,13 @@ export const createPlace = (title, image) => {
         try {
            const dbResult = await fetchPlaces()
            console.log(dbResult)
-           dispatch({ type: SET_NEW, places: dbResult.rows._array})
+           dispatch({ type: SET_NEW, places: dbResult.rows._array})           
+           
+         
        } catch(err) {
            throw(err)
        }
        }
    }
+
+   

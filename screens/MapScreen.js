@@ -1,12 +1,27 @@
 import React from 'react';
-import {  } from 'react-native';
+import { StyleSheet } from 'react-native';
+import MapView from 'react-native-maps';
 
 const MapScreen = (props) => {
+    const mapregion = {
+        latitude: 37.78,
+        longitude: -122.43,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421 
+    }
     return (
-        <View>
-            <Text>Hey</Text>
-        </View> 
+        <MapView
+        style={styles.map}
+        region={mapregion}>
+
+        </MapView>
         )
 }
+
+const styles = StyleSheet.create({
+    map: {
+        flex: 1
+    }
+})
 
 export default MapScreen;

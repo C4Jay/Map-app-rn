@@ -9,27 +9,29 @@ import * as placesactions from '../store/places-action';
 
 const PlaceslistScreen = (props) => {
 
-    const places = useSelector(state => state.places.places)
+    const places =  useSelector(state => state.places.places)
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(placesactions.loadPlaces())
     }, [dispatch])
     return (
-        <FlatList data={places} keyExtractor={item => item.id} renderItem={itemData => (
+        <View>
+        {places ? <FlatList data={places} keyExtractor={item => item.id} renderItem={itemData => (
         <PlaceItem
         image={itemData.item.image}
         title={itemData.item.title}
         address={null}
         onSelect={() => {props.navigation.navigate('Placesdetail', {placeTitle: itemData.item.title, placeId:itemData.item.id, imguri: itemData.item.image})}}
-        ></PlaceItem>)}></FlatList>
+        ></PlaceItem>)}></FlatList> : null}
+        </View>
     )
 }
 
 PlaceslistScreen.navigationOptions = navData => {
     return {
     headerTitle: 'Places',
-    headerRight: (
+    headerRight: () => (
         <HeaderButtons HeaderButtonComponent={CustomHeaderbutton}>
         <Item
         title="create place"
