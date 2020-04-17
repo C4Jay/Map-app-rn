@@ -3,3 +3,6 @@ WARN  no build tool detected in workspace 'c:\Users\Chulaka\rn\recipe-app'. The 
 INFO  shutting down Metals
 INFO  time: initialize in 2.85s
 WARN  no build tool detected in workspace 'c:\Users\Chulaka\rn\map-project-1'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+INFO  shutting down Metals
+INFO  time: initialize in 2.8s
+WARN  no build tool detected in workspace 'c:\Users\Chulaka\rn\map-project-1'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
