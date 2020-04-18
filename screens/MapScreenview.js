@@ -73,7 +73,8 @@ const MapScreenview = (props) => {
              origin={/* {latitude: 6.9565151, longitude: 79.9116888} */ userlocation}
              destination={/* {latitude: 6.0558904, longitude: 80.1769774} */ markercoordinates}
              apikey={google_key}
-             strokeWidth={5}>
+             strokeWidth={5}
+             strokeColor='#6b03fc'>
 
              </MapViewDirections>
             
