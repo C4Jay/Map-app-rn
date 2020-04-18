@@ -3,12 +3,16 @@ import {View, Text, StyleSheet, Alert } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { Modal, TextInput, Button } from 'react-native-paper';
 
+var markers = []
+
 const MapScreen = (props) => {
 
     const [locationpicked, setlocationpicked] = useState()
     const [userinput, setuserinput] = useState(false)
     const [title, settitle] = useState('')
     const [markername, setmarkername] = useState('')
+
+    
 
     const mapregion = {
         latitude: /* 37.78 */ props.navigation.getParam('lat'),
@@ -17,13 +21,27 @@ const MapScreen = (props) => {
         longitudeDelta: 0.0421 
     }
 
-    const picklocationHandler = (event) => {
+    const picklocationHandler = async (event) => {
         console.log(event)
         setuserinput(true)
+        try {
         setlocationpicked({
             lat: event.nativeEvent.coordinate.latitude ,
             lng: event.nativeEvent.coordinate.longitude 
         })
+        const newmarker = {
+            markercoordinates : {
+                latitude: /* locationpicked.lat */ 6.973191023122209,
+                longitude: /* locationpicked.lng */ 79.91679947823286
+            }
+        }
+        markers.push(newmarker)
+        }
+        catch (err) {
+            console.log(err)
+        }
+        return markers  
+        
     }
 
     let markercoordinates;
@@ -77,7 +95,13 @@ const MapScreen = (props) => {
             style={styles.map}
             region={mapregion}
             onPress={picklocationHandler}>
-            {markercoordinates && ( <MapView.Marker title={markername} coordinate={markercoordinates} /> )}            
+            {markercoordinates && ( 
+             
+            <MapView.Marker title={markername} coordinate={markercoordinates} /> 
+             )}
+            
+                 
+                       
             </MapView>
             </View>
         
