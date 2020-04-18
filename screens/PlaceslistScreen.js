@@ -21,8 +21,8 @@ const PlaceslistScreen = (props) => {
         <PlaceItem
         image={itemData.item.image}
         title={itemData.item.title}
-        address={null}
-        onSelect={() => {props.navigation.navigate('Placesdetail', {placeTitle: itemData.item.title, placeId:itemData.item.id, imguri: itemData.item.image})}}
+        address={itemData.item.address}
+        onSelect={() => {props.navigation.navigate('Placesdetail', {placeTitle: itemData.item.title, placeId:itemData.item.id, imguri: itemData.item.image, address: itemData.item.address, location: {lat: itemData.item.lat, lng: itemData.item.lng}})}}
         ></PlaceItem>)}></FlatList> : null}
         </View>
     )
