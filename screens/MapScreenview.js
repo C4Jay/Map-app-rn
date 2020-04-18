@@ -24,7 +24,7 @@ const MapScreenview = (props) => {
 
     useEffect(() => {
         async function locationset() {
-            const usercurrentlocation = await Maplocation.getCurrentPositionAsync({timeout: 10000})
+            const usercurrentlocation = await Maplocation.getCurrentPositionAsync({timeout: 15000})
             console.log('userlocation')
             console.log(usercurrentlocation)  
 /*             setuserlocationlat(usercurrentlocation.coords.latitude)
@@ -71,8 +71,9 @@ const MapScreenview = (props) => {
              )}
              <MapViewDirections
              origin={/* {latitude: 6.9565151, longitude: 79.9116888} */ userlocation}
-             destination={{latitude: 6.0558904, longitude: 80.1769774}}
-             apikey={google_key}>
+             destination={/* {latitude: 6.0558904, longitude: 80.1769774} */ markercoordinates}
+             apikey={google_key}
+             strokeWidth={5}>
 
              </MapViewDirections>
             
