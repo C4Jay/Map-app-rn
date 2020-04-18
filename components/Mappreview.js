@@ -18,7 +18,7 @@ const Mappreview = (props) => {
     } */
 
     if(props.location) {
-        mapPreviewUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${props.location.lat},${props.location.lng}&zoom=13&size=600x300&maptype=roadmap&markers=markers=color:red%7Clabel:A%7C${props.location.lat},${props.location.lng}&key=${env.googleapiKey} `
+        mapPreviewUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${props.location.lat},${props.location.lng}&zoom=13&size=600x300&maptype=roadmap&markers=markers=color:red%7Clabel:A%7C${props.location.lat},${props.location.lng}&key=${env.googleapiKeyworking} `
     }
 
     // AIzaSyAiI5UcfWWLo-t5L0K4GHYjZUQgmm5Xfu0
