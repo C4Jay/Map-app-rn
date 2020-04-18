@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { View, Text, TextInput, StyleSheet, Alert } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Button } from 'react-native-paper';
@@ -12,6 +12,7 @@ const CreateplaceScreen = (props) => {
    
     const [title, settitle] = useState('')
     const [imguri, setimguri] = useState()
+    const [locationselected, setlocationselected] = useState()
 
     const dispatch = useDispatch()
 
@@ -24,9 +25,14 @@ const CreateplaceScreen = (props) => {
     }
 
     const savePlaceHandler = () => {
-        dispatch(placesactions.createPlace(title, imguri))
+        dispatch(placesactions.createPlace(title, imguri, locationselected))
         props.navigation.navigate('Placeslist')
     }
+
+    const locationpickedHandler = useCallback ((location) => {
+        console.log(location)
+        setlocationselected(location)
+    }, [])
 
     return (
     <ScrollView>
@@ -40,7 +46,7 @@ const CreateplaceScreen = (props) => {
 
              <ImgPicker onImageTaken={takenimageHandler}></ImgPicker>
 
-             <Pickerlocation navigation={props.navigation}></Pickerlocation>
+             <Pickerlocation onpickedlocation={locationpickedHandler} navigation={props.navigation}></Pickerlocation>
             <Button onPress={savePlaceHandler} color="purple">
             Create
             </Button>

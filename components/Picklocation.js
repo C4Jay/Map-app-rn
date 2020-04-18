@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { View, Text, ActivityIndicator, Alert, StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
 import * as Maplocation from 'expo-location';
@@ -11,12 +11,15 @@ const Pickerlocation = (props) => {
     const [isfetching, setisfetching] = useState(null)
 
     const maplocationpicked = props.navigation.getParam('locationselected')
+     
+    const { onpickedlocation } = props
 
     useEffect(() => {
         if(maplocationpicked) {
             setlocationpicked(maplocationpicked)
+            props.onpickedlocation(maplocationpicked)
         }
-    }, [maplocationpicked])
+    }, [maplocationpicked, onpickedlocation])
 
     const Permissionverify = async () => {
         const result = await Permissions.askAsync(Permissions.LOCATION)
@@ -45,7 +48,11 @@ const Pickerlocation = (props) => {
                 lat: location.coords.latitude,
                 lng: location.coords.longitude
             })
-            
+            props.onpickedlocation({
+                lat: location.coords.latitude,
+                lng: location.coords.longitude
+            })
+
         } catch (err) {
             Alert.alert(
                 'Couldn`t locate you',
@@ -73,8 +80,8 @@ const Pickerlocation = (props) => {
             <Button color="green" onPress={pickonmapHandler}>Pick On Map</Button>
             
             <View>
-                <Text>{locationpicked.lat}</Text>
-                <Text>{locationpicked.lng}</Text>
+               {/*  <Text>{locationpicked.lat}</Text>
+                <Text>{locationpicked.lng}</Text> */}
             </View>
           
           </View>
