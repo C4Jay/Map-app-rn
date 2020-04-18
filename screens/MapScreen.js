@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {View, Text, StyleSheet, Alert } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { Modal, TextInput, Button } from 'react-native-paper';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 var markers = []
 
@@ -62,6 +63,18 @@ const MapScreen = (props) => {
         settitle(event)
     }
 
+    const savepickHandler = useCallback(() => {
+        if(!locationpicked) {
+         
+            return            
+        }
+        props.navigation.navigate('Createplace', {locationselected: locationpicked })
+    }, [locationpicked])
+
+    useEffect(() => {
+        props.navigation.setParams({savelocation: savepickHandler})
+    }, [savepickHandler])
+
 /*     return (
         <MapView
         showsUserLocation={true}
@@ -108,6 +121,13 @@ const MapScreen = (props) => {
         )
 }
 
+MapScreen.navigationOptions = navData => {
+    const saveFn = navData.navigation.getParam('savelocation')
+    return {
+        headerRight: <TouchableOpacity style={styles.hdrbtn} onPress={saveFn}><Text style={styles.btntext}>Save</Text></TouchableOpacity>
+    }
+}
+
 const styles = StyleSheet.create({
     map: {
         flex: 1
@@ -138,6 +158,13 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
         height: 16,
         backgroundColor: 'rgba(200, 227, 149, 0.57)'
+    },
+    hdrbtn: {
+        marginHorizontal: 20
+    },
+    btntext: {
+        fontSize: 16,
+        color: Platform.OS === 'android' ? 'white' : '#94cc3f'
     }
 })
 
