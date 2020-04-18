@@ -1,16 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, Image, ScrollView, StyleSheet } from 'react-native';
 import Mappreview from '../components/Mappreview';
 import { useSelector } from 'react-redux';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const PlacesdetailScreen = (props) => {
-
     /* const id = props.navigation.getParam('placeTitle')
     const placeselected = useSelector(state => 
         state.places.places.find(place => place.id === id)
     ) */
     
     // then use placeselected
+
+
+    const location = props.navigation.getParam('location')
+    const adrs = props.navigation.getParam('address')
+
+    const navHandler = () => {
+        props.navigation.navigate('Mapviewonly', {lat: location.lat,lng: location.lng, adrs:adrs})
+    }
+
     return (
         <ScrollView contentContainerStyle={{alignItems: 'center'}}>
         <View style={styles.main}>
@@ -21,7 +30,9 @@ const PlacesdetailScreen = (props) => {
          
             <View >
                <View style={styles.adrsview}><Text style={styles.adrs}>{props.navigation.getParam('address')}</Text></View>
+                <TouchableOpacity onPress={navHandler}>
                 <Mappreview style={styles.mappreview} location={props.navigation.getParam('location')}></Mappreview>
+                </TouchableOpacity>
             </View>
         </View>
         </ScrollView> 
@@ -68,9 +79,9 @@ const styles = StyleSheet.create({
     mappreview: {
         width: '100%',
     maxWidth: 350,
-    height: 300,
+    height: 500,
     borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10
+    borderBottomRightRadius: 10,
     }
 })
 

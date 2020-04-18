@@ -5,13 +5,15 @@ import PlaceslistScreen from '../screens/PlaceslistScreen';
 import PlacesdetailScreen from '../screens/PlacesdetailScreen';
 import MapScreen from '../screens/MapScreen';
 import CreateplaceScreen from '../screens/CreateplaceScreen';
+import MapScreenview from '../screens/MapScreenview';
 
 
 const Mealsnav = createStackNavigator({
     Placeslist: PlaceslistScreen,
     Placesdetail: PlacesdetailScreen,
     Mapview: MapScreen,
-    Createplace: CreateplaceScreen
+    Createplace: CreateplaceScreen,
+    Mapviewonly: MapScreenview
 },{
     defaultNavigationOptions : {
         headerStyle: {
