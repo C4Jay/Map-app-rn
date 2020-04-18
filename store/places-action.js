@@ -8,7 +8,20 @@ import { insertPlace, fetchPlaces} from '../helpers/db';
 export const createPlace = (title, image, location) => {
     return async dispatch => {
 
-        const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=${env.googleapiKey}`)
+        const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.lat},${location.lng}&key=${env.googleapiKeyworking}`)
+
+        if(!response.ok) {
+            throw new Error('Something went wrong')
+        }
+
+        const resData = await response.json()
+        console.log(resData)
+        if(!resData.results) {
+            throw new Error('Something went wrong')
+        }
+
+        const locationaddress = resData.results[0].formatted_address
+
         const imgname = image.split('/').pop()
         const newPath = FileSystem.documentDirectory + imgname
 
@@ -17,14 +30,22 @@ export const createPlace = (title, image, location) => {
             from: image,
             to: newPath
         });
-        const dbResult = await insertPlace(title, newPath, 'Dummy', 15.6, 16.6
+        const dbResult = await insertPlace(
+            title, 
+            newPath, 
+            locationaddress, 
+            location.lat, 
+            location.lng
         );
         console.log(dbResult)
     } catch(err) {
         console.log(err)
         throw err
     }
-        dispatch({ type: CREATE_PLACE, placeData: {id: dbResult.insertId, title: title, image: newPath }});
+        dispatch({ type: CREATE_PLACE, placeData: {id: dbResult.insertId, title: title, image: newPath, address: locationaddress, coords: {
+            lat: location.lat,
+            lng: location.lng
+        } }});
 
     }
    }
