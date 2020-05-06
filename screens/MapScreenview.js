@@ -1,6 +1,6 @@
 import React, { useEffect, useState} from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import MapView from 'react-native-maps';
+import { View, Text, StyleSheet, Image, Icon } from 'react-native';
+import MapView, {Marker} from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import * as Maplocation from 'expo-location';
 import env from '../vars/env';
@@ -67,7 +67,11 @@ const MapScreenview = (props) => {
             >
             {markercoordinates && ( 
              
-            <MapView.Marker title={props.navigation.getParam('adrs')} coordinate={markercoordinates} /> 
+            <Marker title={props.navigation.getParam('adrs')} coordinate={markercoordinates} >
+            <View style={{height:35, width: 35}}>
+             <Image source={require('../assets/delivery1.jpg')} style={{height: 35, width: 35}}/>
+             </View>
+            </Marker>
              )}
              <MapViewDirections
              origin={/* {latitude: 6.9565151, longitude: 79.9116888} */ userlocation}
